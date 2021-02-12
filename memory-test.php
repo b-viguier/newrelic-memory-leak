@@ -9,7 +9,7 @@ echo "====\nLaunching $nb requests…\n";
 
 $lastProgress = -1;
 for($i = 0; $i < $nb; ++$i) {
-    execFpm('myPage.php');
+    execFpm('sf-project/public/index.php');
 
     $progress = intval(100*$i / $nb);
     if($progress !== $lastProgress) {

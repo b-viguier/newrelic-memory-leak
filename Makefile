@@ -2,7 +2,7 @@ build:
 	@docker build ./ --rm --tag "newrelic-memory-leak:latest"
 
 memory-test:
-	@docker exec -it newrelic-memory-leak php memory-test.php 100000
+	@docker exec -it newrelic-memory-leak php memory-test.php 1000
 
 status:
 	@docker exec -it newrelic-memory-leak php status.php

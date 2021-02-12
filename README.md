@@ -4,6 +4,8 @@ We identified an huge memory consumption in our Php application under particular
 Also discussed [here](https://discuss.newrelic.com/t/php-agent-9-serious-memory-leak-issues/80863/56).
 This code try to provide a minimal _step to reproduce_.
 
+:warning: Current status: not able to reproduce
+
 ## Conditions
 * Version `9.11` does not have the issue.
 * Versions `9.12` to `9.16` have the issue.
