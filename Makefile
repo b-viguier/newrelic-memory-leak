@@ -4,6 +4,9 @@ build:
 memory-test:
 	@docker exec -it newrelic-memory-leak php memory-test.php 100000
 
+status:
+	@docker exec -it newrelic-memory-leak php status.php
+
 attach:
 	@docker exec -it newrelic-memory-leak bash -c "test=$(PWD) bash"
 
