@@ -17,11 +17,11 @@ make build
 
 Then launch `php-fpm` with expected value for `transaction_tracer.detail`
 ```
-make fpm-detail-0
+NR_LICENSE=<your-license-key-here> make fpm-detail-0
 ```
 or
 ```
-make fpm-detail-1
+NR_LICENSE=<your-license-key-here> make fpm-detail-1
 ```
 
 While FPM is running, in another terminal session, launch the memory test:
