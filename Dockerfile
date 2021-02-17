@@ -1,5 +1,7 @@
 FROM ubuntu:18.04
 
+COPY ./docker-root/ /
+
 RUN apt update && \
     DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends \
         ca-certificates gnupg2 wget libfcgi-bin git && \
