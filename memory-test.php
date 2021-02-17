@@ -4,6 +4,10 @@ require 'tools.php';
 
 echo "NewRelic Status:\n" . join(PHP_EOL, execFpm('status.php')) . PHP_EOL;
 
+echo "Result of first request:\n========\n";
+echo join(PHP_EOL, execFpm('sf-project/public/index.php'));
+echo "\n===============\n";
+
 $nb = $argv[1] ?? 1000;
 echo "====\nLaunching $nb requests…\n";
 
