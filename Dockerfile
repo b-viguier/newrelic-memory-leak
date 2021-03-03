@@ -41,6 +41,8 @@ RUN mkdir -p /tmp/newrelic \
     && NR_INSTALL_USE_CP_NOT_LN=1 NR_INSTALL_SILENT=1 /tmp/newrelic/newrelic-php5-${NEWRELIC_VERSION}-linux/newrelic-install install \
     && rm -rf /tmp/newrelic /tmp/newrelic-agent.tar.gz
 
+# To override NR config files
+COPY ./docker-root/ /
 
 RUN update-alternatives --install /usr/sbin/php-fpm php-fpm /usr/sbin/php-fpm7.4 1
 

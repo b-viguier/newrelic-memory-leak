@@ -38,7 +38,7 @@ Content-type: text/html; charset=UTF-8
 
 newrelic loaded: true
 newrelic.transaction_tracer.enabled: true
-newrelic.transaction_tracer.detail: false
+newrelic.transaction_tracer.detail: 0
 ====
 Launching 100000 requests…
 0%   31186944
