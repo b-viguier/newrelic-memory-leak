@@ -4,8 +4,6 @@ We identified an huge memory consumption in our Php application under particular
 Also discussed [here](https://discuss.newrelic.com/t/php-agent-9-serious-memory-leak-issues/80863/56).
 This code try to provide a minimal _step to reproduce_.
 
-:warning: Current status: not able to reproduce
-
 ## Conditions
 * Version `9.11` does not have the issue.
 * Versions `9.12` to `9.16` have the issue.
@@ -25,6 +23,8 @@ or
 ```
 NR_LICENSE=<your-license-key-here> make fpm-detail-1
 ```
+
+:warning: If you forget to include `NR_LICENSE` NewRelic won't be enabled and results won't be relevant.
 
 While FPM is running, in another terminal session, launch the memory test:
 ```
@@ -50,3 +50,12 @@ Launching 100000 requests…
 98%   30515200
 99%   30535680
 ```
+
+![Graph](graph.png)
+
+## Notes
+
+* Seems related to the callstack of exceptions, you can adjust/test parameters in [`myPage.php`](myPage.php)
+* You can easily change the NR version by modifying the [`Dockerfile`](Dockerfile)
+* type `make` for a description of available targets
+* Opcache is *enabled* in production mode, be sure to reset it if you modify a file. If using provided makefile targets, reset is already done.

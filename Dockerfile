@@ -41,6 +41,7 @@ RUN apt update && \
 # https://docs.newrelic.com/docs/agents/php-agent/installation/php-agent-installation-tar-file
 # https://discuss.newrelic.com/t/relic-solution-php-agent-and-daemon-containers/84841
 ARG NEWRELIC_VERSION=9.16.0.295
+#ARG NEWRELIC_VERSION=9.11.0.267
 ADD ["https://download.newrelic.com/php_agent/archive/${NEWRELIC_VERSION}/newrelic-php5-${NEWRELIC_VERSION}-linux.tar.gz", "/tmp/newrelic-agent.tar.gz"]
 RUN mkdir -p /tmp/newrelic \
     && tar zxpf /tmp/newrelic-agent.tar.gz -C /tmp/newrelic \

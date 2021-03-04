@@ -1,14 +1,20 @@
 <?php
 
-function recursiveCount(int $level): int
+function recursiveCount(int $level): void
 {
     if ($level <= 1) {
-        return 1;
+        throw new \Exception('Oops');
     }
 
-    return 1 + recursiveCount($level - 1);
+    recursiveCount($level - 1);
 }
 
-$count = recursiveCount(100);
+for($i= 0; $i<100; ++$i) {
+    try {
+        recursiveCount(10);
+    } catch(\Exception $e) {
+        // continue
+    }
+}
 
-echo "Count: $count\n";
+echo "That's all folks\n";

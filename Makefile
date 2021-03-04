@@ -9,11 +9,11 @@ build:  ## Build the docker image
 memory-test: opcache-reset    ## Launch memory tests (requires fpm-detail-* target running distinctly)
 	@docker exec -it newrelic-memory-leak php memory-test.php 10000
 
-status: ## Display status page content
+status: opcache-reset ## Display status page content
 	@docker exec -it newrelic-memory-leak php tools.php status.php
 
-hello:  ## Display default page content
-	@docker exec -it newrelic-memory-leak php tools.php sf-project/public/index.php
+hello: opcache-reset  ## Display default page content
+	@docker exec -it newrelic-memory-leak php tools.php myPage.php
 
 opcache-reset:  ## Reset opcache from FPM
 	@docker exec -it newrelic-memory-leak php tools.php opcache-reset.php
