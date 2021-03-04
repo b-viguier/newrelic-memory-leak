@@ -7,7 +7,7 @@ function execFpm(string $scriptPath, array $headers = []): array
     $output = [];
     $result = 0;
     exec(
-        "$headers SCRIPT_NAME=$scriptPath SCRIPT_FILENAME=$scriptPath REQUEST_METHOD=GET REMOTE_ADDR='127.0.0.1' SHELL_VERBOSITY=1 cgi-fcgi -bind -connect /run/php/php7.4-fpm.sock",
+        "$headers SCRIPT_NAME=$scriptPath SCRIPT_FILENAME=$scriptPath REQUEST_METHOD=GET REMOTE_ADDR='127.0.0.1' SHELL_VERBOSITY=1 cgi-fcgi -bind -connect /run/php-sock/php-fpm.sock",
         $output,
         $result
     );

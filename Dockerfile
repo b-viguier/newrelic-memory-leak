@@ -1,5 +1,11 @@
 FROM ubuntu:18.04
 
+# We want to run as many things as possible as non-root and some software are configured using usernames
+# while others are configured using uids.
+# => We make things easier for ourselves, ensuring we always have the same username/uid available
+RUN groupadd --system --gid 2001 m6group \
+    && useradd --system --uid 1001 --group m6group m6user
+
 COPY ./docker-root/ /
 
 RUN apt update && \
@@ -39,12 +45,24 @@ ADD ["https://download.newrelic.com/php_agent/archive/${NEWRELIC_VERSION}/newrel
 RUN mkdir -p /tmp/newrelic \
     && tar zxpf /tmp/newrelic-agent.tar.gz -C /tmp/newrelic \
     && NR_INSTALL_USE_CP_NOT_LN=1 NR_INSTALL_SILENT=1 /tmp/newrelic/newrelic-php5-${NEWRELIC_VERSION}-linux/newrelic-install install \
-    && rm -rf /tmp/newrelic /tmp/newrelic-agent.tar.gz
+    && rm -rf /tmp/newrelic /tmp/newrelic-agent.tar.gz \
+    # NR has to be enabled explicitly
+    && rm /etc/php/7.4/fpm/conf.d/newrelic.ini \
+    && rm /etc/php/7.4/cli/conf.d/newrelic.ini
 
 # To override NR config files
 COPY ./docker-root/ /
 
+WORKDIR /tmp
+ADD ["https://getcomposer.org/installer", "https://composer.github.io/installer.sig", "./"]
+RUN php /tmp/installer --1 --install-dir="/usr/local/bin/" --filename="composer" && php /tmp/installer --2 --install-dir="/usr/local/bin/" --filename="composer2" && rm -f installer installer.sig
+
 RUN update-alternatives --install /usr/sbin/php-fpm php-fpm /usr/sbin/php-fpm7.4 1
 
+RUN mkdir /app && chown m6user:m6group /app
+
 WORKDIR /app
+
+STOPSIGNAL SIGQUIT
+
 CMD ["/bin/bash"]

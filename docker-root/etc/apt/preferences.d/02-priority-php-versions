@@ -1,0 +1,7 @@
+Package: php8.* php7.* php5.* php-*
+Pin: release *
+Pin-Priority: -1
+
+Package: php*
+Pin: release o=Ubuntu
+Pin-Priority: -1

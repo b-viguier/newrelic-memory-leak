@@ -6,7 +6,7 @@ help:
 build:  ## Build the docker image
 	@docker build ./ --rm --tag "newrelic-memory-leak:latest"
 
-memory-test:    ## Launch memory tests (requires fpm-detail-* target running distinctly)
+memory-test: opcache-reset    ## Launch memory tests (requires fpm-detail-* target running distinctly)
 	@docker exec -it newrelic-memory-leak php memory-test.php 10000
 
 status: ## Display status page content
@@ -14,6 +14,9 @@ status: ## Display status page content
 
 hello:  ## Display default page content
 	@docker exec -it newrelic-memory-leak php tools.php sf-project/public/index.php
+
+opcache-reset:  ## Reset opcache from FPM
+	@docker exec -it newrelic-memory-leak php tools.php opcache-reset.php
 
 attach: ## Connect to the running fpm container
 	@docker exec -it newrelic-memory-leak bash

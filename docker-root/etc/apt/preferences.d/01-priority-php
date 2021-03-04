@@ -1,0 +1,4 @@
+# this file should be overwritten during build with the current php minor version
+Package: php7.4-* php-common
+Pin: version *
+Pin-Priority: 300

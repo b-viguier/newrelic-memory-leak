@@ -1,22 +1,22 @@
 <?php
 
-use App\Kernel;
-use Symfony\Component\Dotenv\Dotenv;
-use Symfony\Component\ErrorHandler\Debug;
-use Symfony\Component\HttpFoundation\Request;
 
-require dirname(__DIR__).'/vendor/autoload.php';
-
-(new Dotenv())->bootEnv(dirname(__DIR__).'/.env');
-
-if ($_SERVER['APP_DEBUG']) {
-    umask(0000);
-
-    Debug::enable();
+function foo(int $level) {
+    if($level <= 0) {
+        throw new \Exception('My Exception');
+    }
+    foo($level-1);
 }
 
-$kernel = new Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']);
-$request = Request::createFromGlobals();
-$response = $kernel->handle($request);
-$response->send();
-$kernel->terminate($request, $response);
+
+for($i=0;$i<100;++$i) {
+    try {
+        //$resolver->resolve($request);
+        foo(10);
+    } catch (\Exception $e) {
+        // continue
+    }
+}
+
+die("This is it 2");
+
