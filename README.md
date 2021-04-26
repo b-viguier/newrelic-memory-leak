@@ -1,10 +1,14 @@
+# ℹ️ Status Update
+* Fixed in: https://github.com/newrelic/newrelic-php-agent/pull/123
+* Released in: https://github.com/newrelic/newrelic-php-agent/releases/tag/v9.17.0.300
+
+
 # NewRelic Memory Leak investigation
 
 We identified an huge memory consumption in our Php application under particular conditions with NewRelic.
 Also discussed [here](https://discuss.newrelic.com/t/php-agent-9-serious-memory-leak-issues/80863/56).
 This code try to provide a minimal _step to reproduce_.
 
-ℹ️ Should be fixed by this: https://github.com/newrelic/newrelic-php-agent/pull/123 (still waiting an official release to test it).
 
 ## Conditions
 * Version `9.11` does not have the issue.
